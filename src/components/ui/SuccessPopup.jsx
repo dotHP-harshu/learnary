@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-function SuccessPopup({ msg }) {
+function SuccessPopup({ msg, setSuccess }) {
   const [isShowing, setIsShowing] = useState(true);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setIsShowing(false);
-    }, 5000);
+      setSuccess(null);
+    }, 3000);
     return () => {
       clearTimeout(timeout);
     };

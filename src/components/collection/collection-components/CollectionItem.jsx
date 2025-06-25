@@ -1,28 +1,32 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import supabase from "../../../supabase/supabase";
+import { MdOutlineDelete } from "react-icons/md";
 
-function CollectionItem({ coll, setCollections }) {
+function CollectionItem({ coll, setCollections, user, setError }) {
   let navigate = useNavigate();
   const [collection_name, setCollection_name] = useState(
     `:${coll.title.toLowerCase().split(" ").join("-")}`
   );
 
-  const getCollection = async () => {
-    const { data, error } = await supabase.from("collections").select("*");
+  const getCollection = async (user) => {
+    const { data, error } = await supabase
+      .from("collections")
+      .select("*")
+      .eq("user_id", user.identities[0].id);
 
     if (error) {
-      console.log(error);
+      setError(error.message);
     } else {
       setCollections(data);
     }
   };
 
   const deleteTasks = async () => {
-    const responseTasks = await supabase
-      .from("tasks")
-      .delete()
-      .eq("collection_name", collection_name);
+    const responseTasks = await supabase.from("tasks").delete().match({
+      collection_name: collection_name,
+      user_id: user.identities[0].id,
+    });
   };
   const deleteColl = async () => {
     const responseColls = await supabase
@@ -31,7 +35,9 @@ function CollectionItem({ coll, setCollections }) {
       .eq("id", coll.id)
       .select();
 
-    getCollection();
+    getCollection(user);
+    console.log("deleete");
+    setError("Deleted '" + coll.title + "' collection");
   };
   return (
     <div className="w-full min-h-40 flex justify-between  flex-col collection-item bg-surface-light dark:bg-surface-dark  rounded-lg p-6 border-2 border-border-light dark:border-border-dark ">

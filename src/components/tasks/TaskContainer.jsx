@@ -5,25 +5,28 @@ import TaskPopup from "../popup/TaskPopup";
 import supabase from "../../supabase/supabase";
 import Loading from "../ui/Loading";
 
-function TaskContainer({ collection_name, user }) {
+function TaskContainer({ collection_name, user, setSuccess, setError }) {
   const [isShowingPopup, setIsShowingPopup] = useState(false);
   const [tasks, setTasks] = useState(null);
 
-  const getTasks = async () => {
+  const getTasks = async (user_id) => {
     const { data, error } = await supabase
       .from("tasks")
       .select("*")
-      .eq("collection_name", collection_name)
+      .match({
+        collection_name,
+        user_id,
+      })
       .order("created_at", { ascending: false });
     if (error) {
-      console.log(error);
+      setError(error.message);
     } else {
       setTasks(data);
     }
   };
 
   useEffect(() => {
-    getTasks();
+    getTasks(user.identities[0].id);
   }, []);
 
   return (
@@ -34,6 +37,8 @@ function TaskContainer({ collection_name, user }) {
           setIsShowingPopup={setIsShowingPopup}
           getTasks={getTasks}
           user_id={user.identities[0].id}
+          setSuccess={setSuccess}
+          setError={setError}
         />
       )}
 
@@ -52,7 +57,13 @@ function TaskContainer({ collection_name, user }) {
             </p>
           ) : (
             tasks.map((task) => (
-              <TaskItem key={task.id} task={task} setTasks={setTasks} />
+              <TaskItem
+                key={task.id}
+                task={task}
+                setTasks={setTasks}
+                user={user}
+                setError={setError}
+              />
             ))
           )
         ) : (

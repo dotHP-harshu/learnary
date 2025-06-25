@@ -4,6 +4,7 @@ import PasswordInput from "./PasswordInput";
 import supabase from "../../supabase/supabase";
 import { NavLink, useNavigate } from "react-router";
 import Loading from "../ui/Loading";
+import Logo from "../ui/Logo";
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -37,9 +38,9 @@ function SignIn() {
     <div className=" w-full min-h-dvh flex justify-center items-center bg-bg-light dark:bg-bg-dark text-text-primary-light dark:text-text-primary-dark">
       <form onSubmit={(e) => handleLogin(e)}>
         <div className="w-96 rounded-lg bg-surface-light dark:bg-surface-dark px-6 py-4 border-2 border-border-light dark:border-border-dark">
-          <h1 className="text-2xl font-serif font-bold text-center mb-4">
-            Learnary
-          </h1>
+          <div className="flex justify-center items-center my-6">
+            <Logo size={150} />
+          </div>
           <h3 className="text-xl font-bold text-center mb-4 text-text-muted-light dark:text-text-muted-dark">
             Sign in
           </h3>

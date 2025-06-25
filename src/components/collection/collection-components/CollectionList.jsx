@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CollectionItem from "./CollectionItem";
 import { BsPlusCircleFill } from "react-icons/bs";
 import Loading from "../../ui/Loading";
 
-function CollectionList({ collections, setCollections, setIsShowingPopup }) {
+function CollectionList({
+  user,
+  collections,
+  setCollections,
+  setIsShowingPopup,
+  setError,
+}) {
   return (
     <div className="w-full flex items-center justify-center mt-20">
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-10 max-sm:px-4">
@@ -23,7 +29,9 @@ function CollectionList({ collections, setCollections, setIsShowingPopup }) {
               <CollectionItem
                 key={coll.id}
                 coll={coll}
+                user={user}
                 setCollections={setCollections}
+                setError={setError}
               />
             ))
           )

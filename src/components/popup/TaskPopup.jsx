@@ -3,7 +3,14 @@ import { BsPlusCircleFill, BsPlusSquareFill } from "react-icons/bs";
 import supabase from "../../supabase/supabase";
 import Loading from "../ui/Loading";
 
-function TaskPopup({ setIsShowingPopup, collection_name, getTasks, user_id }) {
+function TaskPopup({
+  setIsShowingPopup,
+  collection_name,
+  getTasks,
+  user_id,
+  setError,
+  setSuccess,
+}) {
   const [isInserting, setIsInserting] = useState(false);
   const [taskName, setTaskName] = useState("");
 
@@ -15,12 +22,13 @@ function TaskPopup({ setIsShowingPopup, collection_name, getTasks, user_id }) {
       .insert({ title: taskName, collection_name, user_id });
 
     if (error) {
-      console.log(error);
+      setError(error.message);
     } else {
       setIsInserting(false);
-      getTasks();
+      getTasks(user_id);
       setIsShowingPopup(false);
       setTaskName("");
+      setSuccess(`Successfully added task "${taskName}" `);
     }
   };
 

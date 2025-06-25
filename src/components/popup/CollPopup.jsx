@@ -4,20 +4,27 @@ import supabase from "../../supabase/supabase";
 import { VscLoading } from "react-icons/vsc";
 import Loading from "../ui/Loading";
 
-function CollPopup({ user, setIsShowingPopup, setCollections }) {
+function CollPopup({
+  user,
+  setIsShowingPopup,
+  setCollections,
+  setSuccess,
+  setError,
+}) {
   const [title, setTitle] = useState("");
   const [isInserting, setIsInserting] = useState(false);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
 
-  const getCollection = async () => {
-    const { data, error } = await supabase.from("collections").select("*");
+  const getCollection = async (user) => {
+    const { data, error } = await supabase
+      .from("collections")
+      .select("*")
+      .eq("user_id", user.identities[0].id);
 
     if (error) {
       setError(error.message);
     } else {
       setCollections(data);
-      setSuccess("Successfully added collection.");
+      setSuccess("Successfully added '" + title + "' collection.");
     }
   };
 
@@ -37,7 +44,7 @@ function CollPopup({ user, setIsShowingPopup, setCollections }) {
 
     setIsShowingPopup(false);
     setIsInserting(false);
-    getCollection();
+    getCollection(user);
     setTitle("");
   };
   return (

@@ -10,6 +10,7 @@ import userContext from "./context/userContext";
 import "./index.css";
 import ProtectRoute from "./components/protectRoute/ProtectRoute";
 import Loading from "./components/ui/Loading";
+import ErrorPage from "./components/ui/ErrorPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -40,6 +41,11 @@ function App() {
     {
       path: "/signup",
       element: <Signup />,
+    },
+    {
+      path: "/",
+      element: <Signup />,
+      errorElement: <ErrorPage />,
     },
     {
       path: "/signin",
