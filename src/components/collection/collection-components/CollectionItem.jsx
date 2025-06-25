@@ -3,24 +3,11 @@ import { useNavigate } from "react-router";
 import supabase from "../../../supabase/supabase";
 import { MdOutlineDelete } from "react-icons/md";
 
-function CollectionItem({ coll, setCollections, user, setError }) {
+function CollectionItem({ coll, getCollection, user, setError }) {
   let navigate = useNavigate();
   const [collection_name, setCollection_name] = useState(
     `:${coll.title.toLowerCase().split(" ").join("-")}`
   );
-
-  const getCollection = async (user) => {
-    const { data, error } = await supabase
-      .from("collections")
-      .select("*")
-      .eq("user_id", user.identities[0].id);
-
-    if (error) {
-      setError(error.message);
-    } else {
-      setCollections(data);
-    }
-  };
 
   const deleteTasks = async () => {
     const responseTasks = await supabase.from("tasks").delete().match({

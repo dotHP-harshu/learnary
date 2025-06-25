@@ -6,13 +6,13 @@ import Loading from "../../ui/Loading";
 function CollectionList({
   user,
   collections,
-  setCollections,
+  getCollection,
   setIsShowingPopup,
   setError,
 }) {
   return (
-    <div className="w-full flex items-center justify-center mt-20">
-      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-10 max-sm:px-4">
+    <div className="w-full flex items-center justify-center mt-6">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div
           onClick={() => setIsShowingPopup(true)}
           className="w-full min-h-40 flex justify-center items-center  flex-col collection-item bg-primary-100 rounded-lg p-6 cursor-pointer border-2 border-primary "
@@ -30,7 +30,7 @@ function CollectionList({
                 key={coll.id}
                 coll={coll}
                 user={user}
-                setCollections={setCollections}
+                getCollection={getCollection}
                 setError={setError}
               />
             ))

@@ -4,30 +4,14 @@ import { MdDelete, MdOutlineDelete } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
 import supabase from "../../supabase/supabase";
 
-function TaskItem({ task, setTasks, user, setError }) {
-  const getTasks = async (user) => {
-    const { data, error } = await supabase
-      .from("tasks")
-      .select("*")
-      .match({
-        collection_name: task.collection_name,
-        user_id: user.identities[0].id,
-      })
-      .order("created_at", { ascending: false });
-    if (error) {
-      setError(error.message);
-    } else {
-      setTasks(data);
-    }
-  };
-
+function TaskItem({ task, getTasks, user, setError }) {
   const deleteTask = async () => {
     const responseTasks = await supabase
       .from("tasks")
       .delete()
       .eq("id", task.id);
 
-    getTasks(user);
+    getTasks(user.identities[0].id);
     setError(`Deleted task "${task.title}"`);
   };
   return (

@@ -7,26 +7,12 @@ import Loading from "../ui/Loading";
 function CollPopup({
   user,
   setIsShowingPopup,
-  setCollections,
+  getCollection,
   setSuccess,
   setError,
 }) {
   const [title, setTitle] = useState("");
   const [isInserting, setIsInserting] = useState(false);
-
-  const getCollection = async (user) => {
-    const { data, error } = await supabase
-      .from("collections")
-      .select("*")
-      .eq("user_id", user.identities[0].id);
-
-    if (error) {
-      setError(error.message);
-    } else {
-      setCollections(data);
-      setSuccess("Successfully added '" + title + "' collection.");
-    }
-  };
 
   const addCollection = async (e) => {
     e.preventDefault();

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Greet from "./collection-components/Greet";
 import CollectionList from "./collection-components/CollectionList";
 import supabase from "../../supabase/supabase";
@@ -7,6 +7,7 @@ import Loading from "../ui/Loading";
 import UserPanel from "../userPanel/UserPanel";
 import SuccessPopup from "../ui/SuccessPopup";
 import ErrorPopup from "../ui/ErrorPopup";
+import Search from "../searchBar/Search";
 
 function Collection() {
   const [user, setUser] = useState(null);
@@ -14,6 +15,7 @@ function Collection() {
   const [isShowingPopup, setIsShowingPopup] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [filteredCollection, setFilteredCollection] = useState(null);
 
   const getUser = async () => {
     const {
@@ -36,12 +38,19 @@ function Collection() {
       setError(error.message);
     } else {
       setCollections(data);
+      setFilteredCollection(data);
     }
   };
 
   useEffect(() => {
     getUser();
   }, []);
+
+  // useEffect(() => {
+  //   if (!collections) {
+  //     setFilteredCollection([...collections]);
+  //   }
+  // }, [collections]);
 
   return (
     <>
@@ -50,18 +59,23 @@ function Collection() {
           {success && <SuccessPopup msg={success} setSuccess={setSuccess} />}
           {error && <ErrorPopup msg={error} setError={setError} />}
           <UserPanel user={user} />
-          <Greet user={user} />
+          <div className="mt-10">
+            <Greet user={user} />
+          </div>
+          <div className="w-full mt-6 ">
+            <Search setArray={setFilteredCollection} array={collections} />
+          </div>
           <CollectionList
             setError={setError}
             user={user}
-            collections={collections}
-            setCollections={setCollections}
+            collections={filteredCollection}
+            getCollection={getCollection}
             setIsShowingPopup={setIsShowingPopup}
           />
           {isShowingPopup && (
             <CollPopup
               user={user}
-              setCollections={setCollections}
+              getCollection={getCollection}
               setIsShowingPopup={setIsShowingPopup}
               setSuccess={setSuccess}
               setError={setError}
