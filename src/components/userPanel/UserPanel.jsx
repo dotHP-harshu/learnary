@@ -25,39 +25,46 @@ function UserPanel({ user }) {
   }, []);
 
   return (
-    <div className="w-full flex justify-between mb-4">
+    <div className="w-full flex justify-between mb-4 ">
       <Logo size={100} />
       <div
         ref={userPanelRef}
-        className={` min-w-96 min-h-96 fixed top-6 p-4 z-50 pt-10 flex-col flex justify-between items-center rounded-2xl left-full bg-surface-light dark:bg-surface-dark transition-all duration-300 border-2 border-border-light dark:border-border-dark ${
-          isShowingUserPanel ? "-translate-x-[110%]" : "translate-x-0"
+        className={`w-96 max-sm:w-full h-96 fixed top-6 z-50  left-full  transition-all duration-300 max-sm:px-2 ${
+          isShowingUserPanel
+            ? "-translate-x-[110%] max-sm:-translate-x-full"
+            : "translate-x-0"
         }`}
       >
-        <span className=" inline-block w-full ">
-          <span className="flex justify-center mb-6 ">
-            <Logo size={150} />
+        <div className="w-full h-full p-4  pt-10 flex-col flex justify-between items-center  rounded-2xl  relative bg-surface-light dark:bg-surface-dark border-2 border-border-light dark:border-border-dark">
+          <span className=" inline-block w-full ">
+            <span className="flex justify-center mb-6 ">
+              <Logo size={150} />
+            </span>
+
+            <h2 className="text-text-primary-light dark:text-text-primary-dark text-2xl max-sm:text-lg text-center capitalize font-bold ">
+              {user.user_metadata.name}
+            </h2>
+            <h2 className="text-text-muted-light dark:text-text-muted-dark text-lg max-sm:text-sm text-center">
+              {user.user_metadata.email}
+            </h2>
           </span>
 
-          <h2 className="text-text-primary-light dark:text-text-primary-dark text-2xl max-sm:text-lg text-center capitalize font-bold ">
-            {user.user_metadata.name}
-          </h2>
-          <h2 className="text-text-muted-light dark:text-text-muted-dark text-lg max-sm:text-sm text-center">
-            {user.user_metadata.email}
-          </h2>
-        </span>
+          <span className="w-full flex justify-between">
+            <h3>Dark theme </h3>
+            <ThemeToggler />
+          </span>
 
-        <span className="w-full flex justify-between">
-          <h3>Dark theme </h3>
-          <ThemeToggler />
-        </span>
-
-        <Signout />
-        <span
-          className="absolute top-4 right-4 cursor-pointer "
-          onClick={() => setIsShowingUserPanel(false)}
-        >
-          <BsPlusCircleFill size={24} className="text-primary-500 rotate-45" />
-        </span>
+          <Signout />
+          <span
+            className="absolute top-4 right-4 cursor-pointer "
+            onClick={() => setIsShowingUserPanel(false)}
+          >
+            <BsPlusCircleFill
+              size={24}
+              className="text-primary-500 rotate-45"
+            />
+          </span>
+        </div>
       </div>
       <span
         onClick={() => setIsShowingUserPanel(true)}

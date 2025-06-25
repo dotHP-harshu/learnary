@@ -33,10 +33,10 @@ function TaskPopup({
   };
 
   return (
-    <div className="w-screen h-screen fixed top-0 left-0 z-10 bg-bg-light dark:bg-bg-dark text-text-primary-light dark:text-text-primary-dark flex justify-center items-center">
+    <div className="w-screen max-sm:px-2 h-screen fixed top-0 left-0 z-10 bg-bg-light dark:bg-bg-dark text-text-primary-light dark:text-text-primary-dark flex justify-center items-center">
       <form
         onSubmit={(e) => addTask(e)}
-        className="min-w-96 w-auto pt-16 p-6 rounded-sm bg-surface-light dark:bg-surface-dark relative"
+        className="w-96 max-sm:w-full pt-16 p-6 rounded-sm bg-surface-light dark:bg-surface-dark relative"
       >
         <span
           className="absolute top-4 right-4 cursor-pointer "

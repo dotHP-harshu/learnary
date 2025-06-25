@@ -16,15 +16,17 @@ function TaskItem({ task, getTasks, user, setError }) {
   };
   return (
     <div className="flex gap-4 items-center justify-between relative bg-surface-light dark:bg-surface-dark flex-wrap p-4 rounded-sm pr-24 border-2 border-border-light dark:border-border-dark">
-      <h3 className="flex justify-center items-center gap-2  ">
+      <div div className="flex ">
         {task.completed ? (
-          <TiTick size={24} className="text-success" />
+          <TiTick size={24} className="text-success shrink-0" />
         ) : (
           <BiCrosshair size={24} />
         )}
-        {task.title}
-      </h3>
-      <p className="text-sm text-text-muted-light dark:text-text-muted-dark text-right">
+        <h3 className="flex justify-center items-center gap-2  ">
+          {task.title}
+        </h3>
+      </div>
+      <p className="text-sm text-text-muted-light dark:text-text-muted-dark text-right max-sm:text-left max-sm:text-xs tracking-tighter ">
         Completed on: {task.created_at}
       </p>
       <MdOutlineDelete

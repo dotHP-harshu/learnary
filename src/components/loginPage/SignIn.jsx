@@ -35,9 +35,12 @@ function SignIn() {
     }
   };
   return (
-    <div className=" w-full min-h-dvh flex justify-center items-center bg-bg-light dark:bg-bg-dark text-text-primary-light dark:text-text-primary-dark">
-      <form onSubmit={(e) => handleLogin(e)}>
-        <div className="w-96 rounded-lg bg-surface-light dark:bg-surface-dark px-6 py-4 border-2 border-border-light dark:border-border-dark">
+    <div className=" w-full min-h-dvh flex justify-center items-center bg-bg-light dark:bg-bg-dark text-text-primary-light dark:text-text-primary-dark ">
+      <form
+        onSubmit={(e) => handleLogin(e)}
+        className="w-96 max-sm:w-full max-sm:px-4 max-sm:text-sm"
+      >
+        <div className="w-full rounded-lg bg-surface-light dark:bg-surface-dark px-6  py-4 border-2 border-border-light dark:border-border-dark">
           <div className="flex justify-center items-center my-6">
             <Logo size={150} />
           </div>

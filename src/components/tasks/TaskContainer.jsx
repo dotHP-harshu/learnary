@@ -45,7 +45,7 @@ function TaskContainer({ collection_name, user, setSuccess, setError }) {
         />
       )}
 
-      <div className="w-full flex flex-col gap-4 lg:px-20 sm:px-10 max-sm:px-4 mt-20">
+      <div className="w-full flex flex-col gap-4 lg:px-20 sm:px-10 max-sm:px-4 mt-10">
         <div>
           <Search array={tasks} setArray={setUpdatedTasks} />
         </div>

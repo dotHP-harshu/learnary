@@ -34,7 +34,7 @@ function Tasks() {
       {error && <ErrorPopup setError={setError} msg={error} />}
       <UserPanel user={user} />
       <BackButton path={"/collection"} />
-      <h1 className="text-2xl font-semibold ml-10 capitalize ">
+      <h1 className="text-2xl font-semibold ml-10 max-sm:ml-4 capitalize ">
         {collection_name.replaceAll(":", "").split("-").join(" ")}
       </h1>
       <TaskContainer
