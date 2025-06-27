@@ -8,5 +8,15 @@
   <body>
     <div id="root" class="bg-bg-light dark:bg-bg-dark"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+    let theme =  localStorage.getItem("theme") || "dark";
+
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+    if (theme === "light") {
+      document.documentElement.classList.remove("dark");
+    }
+    </script>
   </body>
 </html>

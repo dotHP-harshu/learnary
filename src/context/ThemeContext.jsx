@@ -4,7 +4,7 @@ export const themeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme") || "light";
+    return localStorage.getItem("theme") || "dark";
   });
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export const ThemeProvider = ({ children }) => {
     if (theme === "light") {
       document.documentElement.classList.remove("dark");
     }
-  }, []);
+  }, [theme]);
 
   return (
     <themeContext.Provider value={{ theme, setTheme }}>

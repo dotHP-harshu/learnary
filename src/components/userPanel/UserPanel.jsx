@@ -4,6 +4,7 @@ import { FaUserCircle } from "react-icons/fa";
 import Signout from "./Signout";
 import ThemeToggler from "../ui/ThemeToggler";
 import Logo from "../ui/Logo";
+import InstallApp from "./InstallApp";
 
 function UserPanel({ user }) {
   const userPanelRef = useRef(null);
@@ -53,8 +54,10 @@ function UserPanel({ user }) {
             <h3>Dark theme </h3>
             <ThemeToggler />
           </span>
-
-          <Signout />
+          <span className="flex flex-col gap-2 items-center">
+            <InstallApp />
+            <Signout />
+          </span>
           <span
             className="absolute top-4 right-4 cursor-pointer "
             onClick={() => setIsShowingUserPanel(false)}
