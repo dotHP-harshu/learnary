@@ -33,7 +33,13 @@ function TaskPopup({
   };
 
   return (
-    <div className="w-screen max-sm:px-2 h-screen fixed top-0 left-0 z-10 bg-bg-light dark:bg-bg-dark text-text-primary-light dark:text-text-primary-dark flex justify-center items-center">
+    <div
+      className="w-screen h-screen fixed top-0 left-0 z-10 bg-[#ffffff5c] dark:bg-[#0000005c] text-text-primary-light dark:text-text-primary-dark flex justify-center items-center max-sm:px-2"
+      style={{
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
+      }}
+    >
       <form
         onSubmit={(e) => addTask(e)}
         className="w-96 max-sm:w-full pt-16 p-6 rounded-sm bg-surface-light dark:bg-surface-dark relative"

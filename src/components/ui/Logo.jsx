@@ -2,7 +2,7 @@ import React from "react";
 
 function Logo({ size }) {
   return (
-    <img src="/logo.svg" alt="learnary" width={size} className="select-none" />
+    <img src="/logo.png" alt="learnary" width={size} className="select-none" />
   );
 }
 
