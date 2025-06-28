@@ -6,6 +6,8 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import SignIn from "./components/loginPage/SignIn";
 import supabase from "./supabase/supabase";
 import userContext from "./context/userContext";
+import InstallApp from "./components/ui/InstallApp";
+import { InstallAppProvider } from "./context/InstallAppContext";
 
 import "./index.css";
 import ProtectRoute from "./components/protectRoute/ProtectRoute";
@@ -56,6 +58,7 @@ function App() {
       element: (
         <ProtectRoute>
           <Collection />
+          <InstallApp />
         </ProtectRoute>
       ),
     },
@@ -79,9 +82,11 @@ function App() {
 
   return (
     <userContext.Provider value={{ user, setUser }}>
-      <div className="bg-bg-light dark:bg-bg-dark w-full min-h-dvh">
-        <RouterProvider router={Router} />
-      </div>
+      <InstallAppProvider>
+        <div className="bg-bg-light dark:bg-bg-dark w-full min-h-dvh">
+          <RouterProvider router={Router} />
+        </div>
+      </InstallAppProvider>
     </userContext.Provider>
   );
 }

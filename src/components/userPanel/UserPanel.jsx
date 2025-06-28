@@ -4,7 +4,6 @@ import { FaUserCircle } from "react-icons/fa";
 import Signout from "./Signout";
 import ThemeToggler from "../ui/ThemeToggler";
 import Logo from "../ui/Logo";
-import InstallApp from "./InstallApp";
 
 function UserPanel({ user }) {
   const userPanelRef = useRef(null);
@@ -55,7 +54,6 @@ function UserPanel({ user }) {
             <ThemeToggler />
           </span>
           <span className="flex flex-col gap-2 items-center">
-            <InstallApp />
             <Signout />
           </span>
           <span

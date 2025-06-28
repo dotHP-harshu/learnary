@@ -19,6 +19,7 @@ export default defineConfig({
         background_color: "#000",
         display: "standalone",
         start_url: "/collection",
+        id: "/collection",
         icons: [
           {
             src: "pwa.png",
