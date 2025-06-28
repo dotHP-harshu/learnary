@@ -39,6 +39,7 @@ function App() {
     getSession();
   }, []);
 
+
   const Router = createBrowserRouter([
     {
       path: "/signup",
@@ -84,6 +85,14 @@ function App() {
     <userContext.Provider value={{ user, setUser }}>
       <InstallAppProvider>
         <div className="bg-bg-light dark:bg-bg-dark w-full min-h-dvh">
+          {!navigator.onLine && (
+            <div className=" w-full flex justify-center items-center p-4 max-sm:scale-90">
+              <p className="text-warning border-2 border-warning  px-4 py-2 rounded-lg text-base max-sm:text-sm">
+                You are offline. You can not write or update data. We are
+                showing the last saved data
+              </p>
+            </div>
+          )}
           <RouterProvider router={Router} />
         </div>
       </InstallAppProvider>

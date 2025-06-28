@@ -8,6 +8,7 @@ import UserPanel from "../userPanel/UserPanel";
 import SuccessPopup from "../ui/SuccessPopup";
 import ErrorPopup from "../ui/ErrorPopup";
 import Search from "../searchBar/Search";
+import { get, set } from "idb-keyval";
 
 function Collection() {
   const [user, setUser] = useState(null);
@@ -24,7 +25,9 @@ function Collection() {
 
     if (user) {
       setUser(user);
+      await set("user", user);
       getCollection(user);
+      getUserTasks(user);
     }
   };
 
@@ -39,18 +42,45 @@ function Collection() {
     } else {
       setCollections(data);
       setFilteredCollection(data);
+      await set("collections", data);
+    }
+  };
+
+  const getUserTasks = async (user) => {
+    const { data, error } = await supabase
+      .from("tasks")
+      .select("*")
+      .eq("user_id", user.identities[0].id);
+    if (error) {
+      setError(error.message);
+    } else {
+      await set("tasks", data);
     }
   };
 
   useEffect(() => {
-    getUser();
+    const getOfflineData = async () => {
+      if (!navigator.onLine) {
+        const localData = await get("collections");
+        const localUser = await get("user");
+        if (localUser) {
+          setUser(localUser);
+        } else {
+          setError("user is not saved");
+        }
+        if (localData) {
+          setCollections(localData);
+          setFilteredCollection(localData);
+        } else {
+          setError("You have no saved data.");
+        }
+      }
+    };
+    getOfflineData();
+    if (navigator.onLine) {
+      getUser();
+    }
   }, []);
-
-  // useEffect(() => {
-  //   if (!collections) {
-  //     setFilteredCollection([...collections]);
-  //   }
-  // }, [collections]);
 
   return (
     <>

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Loading from "../ui/Loading";
 import ErrorPopup from "../ui/ErrorPopup";
 import SuccessPopup from "../ui/SuccessPopup";
+import { set, get } from "idb-keyval";
 
 function Tasks() {
   const { collection_id } = useParams();
@@ -25,8 +26,10 @@ function Tasks() {
     }
   };
   const getCollectionName = async () => {
-    const { data, error } = await supabase.from("collections").select("*");
-    // .eq("collection_id", collection_id);
+    const { data, error } = await supabase
+      .from("collections")
+      .select("title")
+      .eq("collection_id", collection_id.replace(":", ""));
     if (error) {
       setError(error.message);
     } else {
@@ -35,9 +38,39 @@ function Tasks() {
   };
 
   useEffect(() => {
-    getUser();
-    getCollectionName();
+    if (navigator.onLine) {
+      getUser();
+    }
+    const getLocalUser = async () => {
+      const localUser = await get("user");
+      if (localUser) {
+        setUser(localUser);
+      } else {
+        setError("User was not saved.");
+      }
+    };
+    getLocalUser();
   }, []);
+
+  useEffect(() => {
+    if (navigator.onLine) {
+      getCollectionName();
+    }
+    const getLocalCollectionName = async () => {
+      let localCollectionTitle = await get("collections");
+      if (localCollectionTitle) {
+        localCollectionTitle = localCollectionTitle.filter(
+          (n) => n.collection_id === collection_id.replace(":", "")
+        );
+        setCollection_title(localCollectionTitle);
+      } else {
+        setError("Collections is not saved.");
+      }
+    };
+    if (!navigator.onLine) {
+      getLocalCollectionName();
+    }
+  }, [collection_id]);
 
   return user ? (
     <div className="w-full min-h-dvh py-10 px-10 max-sm:px-4 bg-bg-light dark:bg-bg-dark text-text-primary-light dark:text-text-primary-dark">

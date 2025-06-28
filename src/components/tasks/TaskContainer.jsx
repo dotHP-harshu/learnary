@@ -5,6 +5,7 @@ import TaskPopup from "../popup/TaskPopup";
 import supabase from "../../supabase/supabase";
 import Loading from "../ui/Loading";
 import Search from "../searchBar/Search";
+import { get } from "idb-keyval";
 
 function TaskContainer({ collection_id, user, setSuccess, setError }) {
   const [isShowingPopup, setIsShowingPopup] = useState(false);
@@ -29,7 +30,20 @@ function TaskContainer({ collection_id, user, setSuccess, setError }) {
   };
 
   useEffect(() => {
-    getTasks(user.identities[0].id);
+    const getOfflineData = async () => {
+      let localTasks = await get("tasks");
+      localTasks = localTasks.filter((t) => t.collection_id === collection_id);
+      setTasks([...localTasks]);
+      setUpdatedTasks([...localTasks]);
+    };
+
+    if (navigator.onLine) {
+      getTasks(user.identities[0].id);
+    }
+
+    if (!navigator.onLine) {
+      getOfflineData();
+    }
   }, []);
 
   return (

@@ -14,7 +14,7 @@ function ErrorPopup({ msg, setError }) {
   }, []);
   return (
     isShowing && (
-      <p className="fixed top-6 left-1/2 -translate-x-1/2 w-fit border-2 border-warning text-warning text-sm bg-surface-light dark:bg-surface-dark px-4 py-2 rounded-lg z-50">
+      <p className="fixed top-6 left-1/2 -translate-x-1/2 w-fit border-2 border-warning text-warning text-sm bg-surface-light dark:bg-surface-dark px-4 py-2 rounded-lg z-50 max-sm:text-sm max-sm:scale-90">
         {msg}
       </p>
     )

@@ -1,5 +1,6 @@
 import React from "react";
 import supabase from "../../supabase/supabase";
+import { clear } from "idb-keyval";
 
 function Signout() {
   const handleSignOut = async () => {
@@ -7,6 +8,7 @@ function Signout() {
     if (error) {
       console.log(error.message);
     }
+    await clear();
   };
   return (
     <div>

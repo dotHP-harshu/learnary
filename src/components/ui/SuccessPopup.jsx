@@ -15,7 +15,7 @@ function SuccessPopup({ msg, setSuccess }) {
 
   return (
     isShowing && (
-      <p className="fixed top-10 left-1/2 -translate-y-1/2 w-fit border-2 border-success text-success text-sm bg-surface-light dark:bg-surface-dark px-4 py-2 rounded-lg">
+      <p className="fixed top-10 left-1/2 -translate-y-1/2 w-fit border-2 border-success text-success text-sm bg-surface-light dark:bg-surface-dark px-4 py-2 rounded-lg max-sm:text-sm max-sm:scale-90">
         {msg}
       </p>
     )
