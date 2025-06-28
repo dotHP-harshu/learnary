@@ -5,7 +5,7 @@ import Loading from "../ui/Loading";
 
 function TaskPopup({
   setIsShowingPopup,
-  collection_name,
+  collection_id,
   getTasks,
   user_id,
   setError,
@@ -19,7 +19,7 @@ function TaskPopup({
     setIsInserting(true);
     const { error } = await supabase
       .from("tasks")
-      .insert({ title: taskName, collection_name, user_id });
+      .insert({ title: taskName, collection_id, user_id });
 
     if (error) {
       setError(error.message);

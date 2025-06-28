@@ -1,5 +1,5 @@
 import TaskContainer from "./TaskContainer";
-import { useParams } from "react-router";
+import { data, useParams } from "react-router";
 import BackButton from "../ui/BackButton";
 import UserPanel from "../userPanel/UserPanel";
 import supabase from "../../supabase/supabase";
@@ -9,10 +9,11 @@ import ErrorPopup from "../ui/ErrorPopup";
 import SuccessPopup from "../ui/SuccessPopup";
 
 function Tasks() {
-  const { collection_name } = useParams();
+  const { collection_id } = useParams();
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [collection_title, setCollection_title] = useState(null);
 
   const getUser = async () => {
     const {
@@ -23,9 +24,19 @@ function Tasks() {
       setUser(user);
     }
   };
+  const getCollectionName = async () => {
+    const { data, error } = await supabase.from("collections").select("*");
+    // .eq("collection_id", collection_id);
+    if (error) {
+      setError(error.message);
+    } else {
+      setCollection_title(data);
+    }
+  };
 
   useEffect(() => {
     getUser();
+    getCollectionName();
   }, []);
 
   return user ? (
@@ -35,10 +46,10 @@ function Tasks() {
       <UserPanel user={user} />
       <BackButton path={"/collection"} />
       <h1 className="text-2xl font-semibold ml-10 max-sm:ml-4 capitalize ">
-        {collection_name.replaceAll(":", "").split("-").join(" ")}
+        {collection_title ? collection_title[0].title : <Loading />}
       </h1>
       <TaskContainer
-        collection_name={collection_name}
+        collection_id={collection_id.replace(":", "")}
         user={user}
         setError={setError}
         setSuccess={setSuccess}

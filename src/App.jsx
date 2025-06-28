@@ -63,7 +63,7 @@ function App() {
       ),
     },
     {
-      path: "/tasks/:collection_name",
+      path: "/tasks/:collection_id",
       element: (
         <ProtectRoute>
           <Tasks />

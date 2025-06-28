@@ -6,7 +6,7 @@ import supabase from "../../supabase/supabase";
 import Loading from "../ui/Loading";
 import Search from "../searchBar/Search";
 
-function TaskContainer({ collection_name, user, setSuccess, setError }) {
+function TaskContainer({ collection_id, user, setSuccess, setError }) {
   const [isShowingPopup, setIsShowingPopup] = useState(false);
   const [tasks, setTasks] = useState(null);
   const [updatedTasks, setUpdatedTasks] = useState(null);
@@ -16,7 +16,7 @@ function TaskContainer({ collection_name, user, setSuccess, setError }) {
       .from("tasks")
       .select("*")
       .match({
-        collection_name,
+        collection_id,
         user_id,
       })
       .order("created_at", { ascending: false });
@@ -36,7 +36,7 @@ function TaskContainer({ collection_name, user, setSuccess, setError }) {
     <>
       {isShowingPopup && (
         <TaskPopup
-          collection_name={collection_name}
+          collection_id={collection_id}
           setIsShowingPopup={setIsShowingPopup}
           getTasks={getTasks}
           user_id={user.identities[0].id}

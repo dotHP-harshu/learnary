@@ -5,13 +5,11 @@ import { MdOutlineDelete } from "react-icons/md";
 
 function CollectionItem({ coll, getCollection, user, setError }) {
   let navigate = useNavigate();
-  const [collection_name, setCollection_name] = useState(
-    `:${coll.title.toLowerCase().split(" ").join("-")}`
-  );
+  const [collection_id, setCollection_name] = useState(coll.collection_id);
 
   const deleteTasks = async () => {
     const responseTasks = await supabase.from("tasks").delete().match({
-      collection_name: collection_name,
+      collection_id: collection_id,
       user_id: user.identities[0].id,
     });
   };
@@ -31,7 +29,7 @@ function CollectionItem({ coll, getCollection, user, setError }) {
       <h1
         className="text-2xl max-sm:text-xl font-bold capitalize hover:underline cursor-pointer w-fit"
         onClick={() => {
-          navigate("/tasks/:" + coll.title.toLowerCase().split(" ").join("-"));
+          navigate("/tasks/:" + coll.collection_id);
         }}
       >
         {coll.title}

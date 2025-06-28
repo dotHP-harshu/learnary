@@ -3,6 +3,7 @@ import { BsPlusCircleFill, BsPlusSquareFill } from "react-icons/bs";
 import supabase from "../../supabase/supabase";
 import { VscLoading } from "react-icons/vsc";
 import Loading from "../ui/Loading";
+import getUniqueCode from "../../utils/getUniqueCode";
 
 function CollPopup({
   user,
@@ -20,7 +21,7 @@ function CollPopup({
     const { error } = await supabase.from("collections").insert({
       title,
       user_id: user.identities[0].id,
-      path: `:${title.toLowerCase().split(" ").join("-")}`,
+      collection_id: getUniqueCode(title.toLowerCase().split(" ", "")),
     });
 
     if (error) {
