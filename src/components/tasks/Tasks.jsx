@@ -8,6 +8,8 @@ import Loading from "../ui/Loading";
 import ErrorPopup from "../ui/ErrorPopup";
 import SuccessPopup from "../ui/SuccessPopup";
 import { set, get } from "idb-keyval";
+import { RiMindMap } from "react-icons/ri";
+import SkillMap from "./SkillMap";
 
 function Tasks() {
   const { collection_id } = useParams();
@@ -15,6 +17,7 @@ function Tasks() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [collection_title, setCollection_title] = useState(null);
+  const [isShowingSkillMap, setIsShowingSkillMap] = useState(false);
 
   const getUser = async () => {
     const {
@@ -73,20 +76,37 @@ function Tasks() {
   }, [collection_id]);
 
   return user ? (
-    <div className="w-full min-h-dvh py-10 px-10 max-sm:px-4 bg-bg-light dark:bg-bg-dark text-text-primary-light dark:text-text-primary-dark">
+    <div className="w-full min-h-dvh h-auto py-10 px-10 max-sm:px-4 bg-bg-light dark:bg-bg-dark text-text-primary-light dark:text-text-primary-dark overflow-hidden">
       {success && <SuccessPopup setSuccess={setSuccess} msg={success} />}
       {error && <ErrorPopup setError={setError} msg={error} />}
       <UserPanel user={user} />
-      <BackButton path={"/collection"} />
+      <div className="flex justify-between items-center ">
+        <BackButton path={"/collection"} />
+        <RiMindMap
+          title="Skill map"
+          onClick={() => {
+            setIsShowingSkillMap((prev) => !prev);
+          }}
+          size={40}
+          className="bg-surface-light dark:bg-surface-dark p-2 rounded-full cursor-pointer"
+        />
+      </div>
       <h1 className="text-2xl font-semibold ml-10 max-sm:ml-4 capitalize ">
         {collection_title ? collection_title[0].title : <Loading />}
       </h1>
-      <TaskContainer
-        collection_id={collection_id.replace(":", "")}
-        user={user}
-        setError={setError}
-        setSuccess={setSuccess}
-      />
+      <div className="relative grid grid-cols-2 max-sm:grid-cols-1">
+        <TaskContainer
+          collection_id={collection_id.replace(":", "")}
+          user={user}
+          setError={setError}
+          setSuccess={setSuccess}
+        />
+        <SkillMap
+          isShowingSkillMap={isShowingSkillMap}
+          collection_id={collection_id.replace(":", "")}
+          setError={setError}
+        />
+      </div>
     </div>
   ) : (
     <Loading />

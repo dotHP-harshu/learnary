@@ -4,6 +4,7 @@ import supabase from "../../supabase/supabase";
 import { VscLoading } from "react-icons/vsc";
 import Loading from "../ui/Loading";
 import getUniqueCode from "../../utils/getUniqueCode";
+import SkillMap from "../tasks/SkillMap";
 
 function CollPopup({
   user,
@@ -15,14 +16,28 @@ function CollPopup({
   const [title, setTitle] = useState("");
   const [isInserting, setIsInserting] = useState(false);
 
+  const addSkillMap = async (collection_id) => {
+    const { error } = await supabase.from("skillmaps").insert({
+      collection_id,
+      user_id: user.identities[0].id,
+    });
+
+    if (error) {
+      setError(error.message);
+    }
+  };
+
   const addCollection = async (e) => {
     e.preventDefault();
     setIsInserting(true);
+    const collection_id = getUniqueCode(title.toLowerCase().split(" ", ""));
     const { error } = await supabase.from("collections").insert({
       title,
       user_id: user.identities[0].id,
-      collection_id: getUniqueCode(title.toLowerCase().split(" ", "")),
+      collection_id,
     });
+
+    addSkillMap(collection_id);
 
     if (error) {
       setIsInserting(false);

@@ -7,6 +7,15 @@ function CollectionItem({ coll, getCollection, user, setError }) {
   let navigate = useNavigate();
   const [collection_id, setCollection_name] = useState(coll.collection_id);
 
+
+  
+
+  const deleteSkillMap = async () => {
+    const responseTasks = await supabase.from("skillmaps").delete().match({
+      collection_id: collection_id,
+    });
+  };
+
   const deleteTasks = async () => {
     const responseTasks = await supabase.from("tasks").delete().match({
       collection_id: collection_id,
@@ -21,7 +30,6 @@ function CollectionItem({ coll, getCollection, user, setError }) {
       .select();
 
     getCollection(user);
-    console.log("deleete");
     setError("Deleted '" + coll.title + "' collection");
   };
   return (
@@ -42,6 +50,7 @@ function CollectionItem({ coll, getCollection, user, setError }) {
           size={30}
           onClick={() => {
             if (confirm(`Are you sure to delete ${coll.title} collection?`)) {
+              deleteSkillMap();
               deleteTasks();
               deleteColl();
             }

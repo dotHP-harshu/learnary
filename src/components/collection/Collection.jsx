@@ -28,6 +28,7 @@ function Collection() {
       await set("user", user);
       getCollection(user);
       getUserTasks(user);
+      getUserSkillMaps(user);
     }
   };
 
@@ -55,6 +56,17 @@ function Collection() {
       setError(error.message);
     } else {
       await set("tasks", data);
+    }
+  };
+  const getUserSkillMaps = async (user) => {
+    const { data, error } = await supabase
+      .from("skillmaps")
+      .select("*")
+      .eq("user_id", user.identities[0].id);
+    if (error) {
+      setError(error.message);
+    } else {
+      await set("skillmaps", data);
     }
   };
 

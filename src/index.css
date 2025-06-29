@@ -28,3 +28,21 @@
   --color-primary-800: #5a2a14;
   --color-primary-900: #391b0c;
 }
+
+
+/* width */
+.scrollable::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.scrollable::-webkit-scrollbar-track {
+  border-radius: 5px;
+}
+
+/* Handle */
+.scrollable::-webkit-scrollbar-thumb {
+  border-radius: 14px;
+  background-color: #c25e32;
+  cursor: pointer;
+}
