@@ -8,8 +8,8 @@ import Loading from "../ui/Loading";
 import ErrorPopup from "../ui/ErrorPopup";
 import SuccessPopup from "../ui/SuccessPopup";
 import { set, get } from "idb-keyval";
-import { RiMindMap } from "react-icons/ri";
 import SkillMap from "./SkillMap";
+import { FaLightbulb } from "react-icons/fa6";
 
 function Tasks() {
   const { collection_id } = useParams();
@@ -82,13 +82,13 @@ function Tasks() {
       <UserPanel user={user} />
       <div className="flex justify-between items-center ">
         <BackButton path={"/collection"} />
-        <RiMindMap
+        <FaLightbulb
           title="Skill map"
           onClick={() => {
             setIsShowingSkillMap((prev) => !prev);
           }}
           size={40}
-          className="bg-surface-light dark:bg-surface-dark p-2 rounded-full cursor-pointer"
+          className="bg-surface-light dark:bg-surface-dark p-2 rounded-full cursor-pointer text-text-muted-light dark:text-text-muted-dark border-2 border-border-light dark:border-border-dark"
         />
       </div>
       <h1 className="text-2xl font-semibold ml-10 max-sm:ml-4 capitalize ">

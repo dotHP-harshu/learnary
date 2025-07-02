@@ -5,7 +5,7 @@ function PasswordInput({ password, setPassword }) {
   const passwordInput = useRef(null);
   return (
     <div className="flex flex-col gap-2 my-2">
-      <label htmlFor="password">Enter your email</label>
+      <label htmlFor="password">Enter your password</label>
       <div className="relative">
         <input
           className="w-full rounded-sm p-2 outline-none border-2 border-border-light dark:border-border-dark text-text-muted-light dark:text-text-muted-dark"

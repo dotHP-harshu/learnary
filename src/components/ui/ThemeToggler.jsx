@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { themeContext } from "../../context/ThemeContext";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 const ThemeToggler = () => {
   const { theme, setTheme } = useContext(themeContext);
@@ -25,7 +26,10 @@ const ThemeToggler = () => {
 
   return (
     <>
-      <label className="flex cursor-pointer select-none items-center scale-75">
+      <label
+        className="flex cursor-pointer select-none items-center scale-75 "
+        title="Theme"
+      >
         <div className="relative">
           <input
             type="checkbox"
@@ -33,16 +37,19 @@ const ThemeToggler = () => {
             onChange={handleCheckboxChange}
             className="sr-only"
           />
-          <div
-            className={`box block h-8 w-14 rounded-full ${
-              isChecked ? "bg-bg-dark" : "bg-primary"
-            }`}
-          ></div>
-          <div
-            className={`absolute left-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-white transition ${
-              isChecked ? "" : "translate-x-full"
-            }`}
-          ></div>
+          <div>
+            {!isChecked ? (
+              <MdLightMode
+                size={50}
+                className="border-2 p-2 border-border-light  text-text-primary-dark  rounded-full cursor-pointer"
+              />
+            ) : (
+              <MdDarkMode
+                size={50}
+                className="border-2 p-2  border-border-dark dark:text-text-primary-light  rounded-full cursor-pointer"
+              />
+            )}
+          </div>
         </div>
       </label>
     </>

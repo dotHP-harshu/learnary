@@ -13,6 +13,7 @@ import "./index.css";
 import ProtectRoute from "./components/protectRoute/ProtectRoute";
 import Loading from "./components/ui/Loading";
 import ErrorPage from "./components/ui/ErrorPage";
+import Dashboard from "./components/dashboard/Dashboard";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -38,7 +39,6 @@ function App() {
 
     getSession();
   }, []);
-
 
   const Router = createBrowserRouter([
     {
@@ -68,6 +68,14 @@ function App() {
       element: (
         <ProtectRoute>
           <Tasks />
+        </ProtectRoute>
+      ),
+    },
+    {
+      path: "/dashboard",
+      element: (
+        <ProtectRoute>
+          <Dashboard />
         </ProtectRoute>
       ),
     },

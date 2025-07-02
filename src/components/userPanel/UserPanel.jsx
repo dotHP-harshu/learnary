@@ -4,6 +4,8 @@ import { FaUserCircle } from "react-icons/fa";
 import Signout from "./Signout";
 import ThemeToggler from "../ui/ThemeToggler";
 import Logo from "../ui/Logo";
+import DashboadButton from "../dashboard/DashboadButton";
+import CollectionButton from "../collection/CollectionButton";
 
 function UserPanel({ user }) {
   const userPanelRef = useRef(null);
@@ -49,8 +51,9 @@ function UserPanel({ user }) {
             </h2>
           </span>
 
-          <span className="w-full flex justify-between">
-            <h3>Dark theme </h3>
+          <span className="w-full flex justify-center items-center gap-4 flex-wrap">
+            <CollectionButton />
+            <DashboadButton />
             <ThemeToggler />
           </span>
           <span className="flex flex-col gap-2 items-center">

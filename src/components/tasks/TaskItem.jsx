@@ -1,6 +1,6 @@
 import React from "react";
 import { BiCrosshair } from "react-icons/bi";
-import { MdDelete, MdOutlineDelete } from "react-icons/md";
+import { MdOutlineDelete } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
 import supabase from "../../supabase/supabase";
 
@@ -15,14 +15,14 @@ function TaskItem({ task, getTasks, user, setError }) {
     setError(`Deleted task "${task.title}"`);
   };
   return (
-    <div className="flex gap-4 items-center justify-between relative bg-surface-light dark:bg-surface-dark flex-wrap p-4 rounded-sm pr-24 border-2 border-border-light dark:border-border-dark">
+    <div className="flex gap-4 items-center justify-between relative bg-surface-light dark:bg-surface-dark flex-wrap p-4 rounded-sm pr-24 border-2 border-border-light dark:border-border-dark shadow-lg shadow-border-light dark:shadow-border-dark">
       <div className="flex ">
         {task.completed ? (
           <TiTick size={24} className="text-success shrink-0" />
         ) : (
           <BiCrosshair size={24} />
         )}
-        <h3 className="flex justify-center items-center gap-2  ">
+        <h3 className="flex justify-center items-center gap-2 max-sm:text-xs tracking-tight font-light ">
           {task.title}
         </h3>
       </div>
@@ -36,7 +36,7 @@ function TaskItem({ task, getTasks, user, setError }) {
             deleteTask();
           }
         }}
-        className="text-warning cursor-pointer rounded-full p-1 bg-primary-50 absolute top-1/2 right-4 -translate-y-1/2 "
+        className="text-error cursor-pointer rounded-full p-1 bg-primary-50 absolute top-1/2 right-4 -translate-y-1/2 "
       />
     </div>
   );

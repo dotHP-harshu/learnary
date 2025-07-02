@@ -14,7 +14,7 @@ function Signout() {
     <div>
       <p
         onClick={handleSignOut}
-        className="text-warning text-base hover:underline cursor-pointer"
+        className="text-error text-base hover:underline cursor-pointer select-none"
       >
         Sign out
       </p>

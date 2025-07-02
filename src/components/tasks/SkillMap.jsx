@@ -71,7 +71,7 @@ function SkillMap({ isShowingSkillMap, collection_id, setError }) {
         } max-sm:w-full w-1/2 h-[550px] absolute right-0 top-auto p-6 max-sm:p-2 transition-all duration-300
         `}
     >
-      <div className="relative w-full h-full dark:bg-surface-dark bg-surface-light rounded-2xl p-4 max-sm:p-2 border-2 border-border-light dark:border-border-dark ">
+      <div className="relative w-full h-full dark:bg-surface-dark bg-surface-light rounded-2xl p-4 max-sm:p-2 border-2 border-border-light dark:border-border-dark shadow-lg shadow-border-light dark:shadow-border-dark">
         {!isShowingTextArea && (
           <FaPenToSquare
             title="Edit"
@@ -100,7 +100,7 @@ function SkillMap({ isShowingSkillMap, collection_id, setError }) {
                 </button>
               </div>
             ) : (
-              <pre className="w-full h-[450px] scrollable text-base max-sm:text-sm mt-6  overflow-y-scroll ">
+              <pre className="w-full h-[450px] scrollable text-base max-sm:text-sm mt-6 overflow-y-scroll text-wrap">
                 {skillMap === "" ? (
                   <p className="text-xs">
                     "Click on edit button to update skillMap"

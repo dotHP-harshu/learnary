@@ -33,7 +33,7 @@ function CollectionItem({ coll, getCollection, user, setError }) {
     setError("Deleted '" + coll.title + "' collection");
   };
   return (
-    <div className="w-full min-h-40 flex justify-between  flex-col collection-item bg-surface-light dark:bg-surface-dark  rounded-lg p-6 border-2 border-border-light dark:border-border-dark ">
+    <div className="w-full min-h-40 flex justify-between flex-col collection-item bg-surface-light dark:bg-surface-dark rounded-lg p-6 border-2 border-border-light dark:border-border-dark shadow-lg shadow-border-light dark:shadow-border-dark">
       <h1
         className="text-2xl max-sm:text-xl font-bold capitalize hover:underline cursor-pointer w-fit"
         onClick={() => {
@@ -55,7 +55,7 @@ function CollectionItem({ coll, getCollection, user, setError }) {
               deleteColl();
             }
           }}
-          className="text-warning cursor-pointer rounded-full p-1 bg-primary-50"
+          className="text-error cursor-pointer rounded-full p-1 bg-primary-50"
         />
       </span>
     </div>
