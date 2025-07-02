@@ -11,13 +11,7 @@ const ThemeToggler = () => {
   };
   const changeTheme = () => {
     const theme = isChecked ? "light" : "dark";
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    }
-    if (theme === "light") {
-      document.documentElement.classList.remove("dark");
-    }
-    localStorage.setItem("theme", theme);
+    setTheme(theme);
   };
 
   useEffect(() => {

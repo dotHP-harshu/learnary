@@ -14,6 +14,7 @@ export const ThemeProvider = ({ children }) => {
     if (theme === "light") {
       document.documentElement.classList.remove("dark");
     }
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   return (

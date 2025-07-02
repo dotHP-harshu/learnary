@@ -8,7 +8,6 @@ function SkillMap({ isShowingSkillMap, collection_id, setError }) {
   const [isShowingTextArea, setIsShowingTextArea] = useState(false);
   const [skillMap, setSkillMap] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
-
   const updateSkillMap = async () => {
     setIsUpdating(true);
     const { data, error } = await supabase
@@ -68,7 +67,7 @@ function SkillMap({ isShowingSkillMap, collection_id, setError }) {
       className={`
         ${
           isShowingSkillMap ? "" : "translate-x-[110%]"
-        } max-sm:w-full w-1/2 h-[550px] absolute right-0 top-auto p-6 max-sm:p-2 transition-all duration-300
+        } max-sm:w-full w-1/2 h-[550px] absolute right-0 top-full p-6 max-sm:p-2 transition-all duration-300 z-30
         `}
     >
       <div className="relative w-full h-full dark:bg-surface-dark bg-surface-light rounded-2xl p-4 max-sm:p-2 border-2 border-border-light dark:border-border-dark shadow-lg shadow-border-light dark:shadow-border-dark">

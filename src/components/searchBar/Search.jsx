@@ -14,7 +14,7 @@ function Search({ array, setArray }) {
     setArray(updatedArr);
   };
   return (
-    <div className="relative w-fit h-fit ">
+    <div className="relative w-fit h-fit sm:pl-10 max-sm:pl-4">
       <input
         onChange={(e) => handleSearch(e)}
         type="text"

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 function BackButton({ path }) {
   const navigate = useNavigate();
   return (
-    <div className="py-4 pl-10 max-sm:pl-4">
+    <div className=" pl-10 max-sm:pl-4">
       <BiArrowBack
         title="Back"
         onClick={() => navigate(path)}
