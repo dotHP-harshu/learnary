@@ -14,6 +14,7 @@ import ProtectRoute from "./components/protectRoute/ProtectRoute";
 import Loading from "./components/ui/Loading";
 import ErrorPage from "./components/ui/ErrorPage";
 import Dashboard from "./components/dashboard/Dashboard";
+import Home from "./components/home/Home";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -47,8 +48,7 @@ function App() {
     },
     {
       path: "/",
-      element: <Signup />,
-      errorElement: <ErrorPage />,
+      element: <Home />,
     },
     {
       path: "/signin",
