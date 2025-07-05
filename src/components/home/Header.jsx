@@ -2,11 +2,13 @@ import React, { useRef } from "react";
 import Logo from "../ui/Logo";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useNavigate } from "react-router";
 
 gsap.registerPlugin(useGSAP);
 
 function Header() {
   const header = useRef();
+  const navigate = useNavigate();
   useGSAP(() => {
     gsap.from(header.current, {
       y: -100,
@@ -28,7 +30,12 @@ function Header() {
       <span className="max-sm:scale-80">
         <Logo size={150} />
       </span>
-      <button className="max-sm:scale-80 text-primary text-base border-2 border-primary rounded-lg px-6 py-2 cursor-pointer transition-colors duration-300 hover:bg-primary hover:text-text-primary-dark">
+      <button
+        onClick={() => {
+          navigate("/signin");
+        }}
+        className="max-sm:scale-80 text-primary text-base border-2 border-primary rounded-lg px-6 py-2 cursor-pointer transition-colors duration-300 hover:bg-primary hover:text-text-primary-dark"
+      >
         Login
       </button>
     </div>

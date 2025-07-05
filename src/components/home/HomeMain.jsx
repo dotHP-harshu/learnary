@@ -4,10 +4,12 @@ import { TextPlugin } from "gsap/TextPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import { IoIosArrowForward } from "react-icons/io";
+import { useNavigate } from "react-router";
 
 gsap.registerPlugin(useGSAP, TextPlugin, ScrollTrigger);
 
 function HomeMain() {
+  const navigate = useNavigate();
   const heading = useRef();
   const paragraph = useRef();
   const button = useRef();
@@ -76,6 +78,9 @@ function HomeMain() {
       </div>
       <div className="w-fit h-fit overflow-hidden">
         <button
+          onClick={() => {
+            navigate("/signup");
+          }}
           ref={button}
           className="bg-primary text-text-primary-dark text-base border-2 border-primary rounded-lg px-6 py-2 cursor-pointer transition-colors duration-300 hover:bg-transparent hover:text-text-primary-light dark:hover:text-text-primary-dark flex justify-center items-center gap-4 max-sm:scale-80"
         >
