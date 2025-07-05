@@ -114,21 +114,20 @@ const Chart = ({ user }) => {
         type: "line",
         toolbar: {
           show: false,
+          tools: {
+            download: false,
+            selection: false,
+            zoom: false,
+            zoomin: false,
+            zoomout: false,
+            pan: false,
+          },
         },
       },
       stroke: {
         curve: "smooth",
         width: 3,
         colors: ["#c25e32"],
-      },
-      title: {
-        text: "Completed Tasks in a Week ",
-        align: "left",
-        style: {
-          fontSize: "20px",
-          fontWeight: "bold",
-          color: "#c25e32", // Tailwind gray-600
-        },
       },
       markers: {
         size: 5,
@@ -173,7 +172,10 @@ const Chart = ({ user }) => {
   });
 
   return (
-    <div className=" w-full flex justify-center items-center max-sm:px-4 mt-10 ">
+    <div className=" w-full flex justify-center items-center max-sm:px-4 mt-10 max-sm:scale-90 flex-col gap-4 ">
+      <h1 className="text-lg max-sm:text-base font-bold text-primary mb-6">
+        Tasks Completed in the Last 7 Days
+      </h1>
       <div className="bg-surface-light dark:bg-surface-dark max-w-3xl w-3xl max-sm:w-full p-6 rounded-lg border-2 border-border-light dark:border-border-dark shadow-lg shadow-border-light dark:shadow-border-dark">
         <div id="chart" className="w-full ">
           {error && <p>{error}</p>}

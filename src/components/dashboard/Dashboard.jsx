@@ -5,6 +5,7 @@ import Greet from "../collection/collection-components/Greet";
 import UserPanel from "../userPanel/UserPanel";
 import Chart from "./Chart";
 import { get } from "idb-keyval";
+import ActiveStats from "./ActiveStats";
 
 function Dashboard() {
   const [user, setUser] = useState(null);
@@ -42,6 +43,9 @@ function Dashboard() {
           <div className="flex flex-col gap-6">
             <UserPanel user={user} />
             <Greet user={user} />
+          </div>
+          <div>
+            <ActiveStats user={user} />
           </div>
           <div>
             <Chart user={user} />
