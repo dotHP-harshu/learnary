@@ -3,20 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Learnary</title>
+    <title>Learnary — Track Your Learning Progress</title>
+    <meta
+      name="description"
+      content="Learnary is your personal learning tracker. Create collections, manage tasks, and visualize your progress. Works offline and syncs via Supabase."
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/pwa.png" type="image/png" />
+
+    <!-- Theme color -->
+    <meta name="theme-color" content="#111827" />
   </head>
   <body>
     <div id="root" class="bg-bg-light dark:bg-bg-dark"></div>
     <script type="module" src="/src/main.jsx"></script>
     <script>
-    let theme =  localStorage.getItem("theme") || "dark";
+      let theme = localStorage.getItem("theme") || "dark";
 
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    }
-    if (theme === "light") {
-      document.documentElement.classList.remove("dark");
-    }
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+      if (theme === "light") {
+        document.documentElement.classList.remove("dark");
+      }
     </script>
   </body>
 </html>

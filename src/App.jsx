@@ -25,21 +25,23 @@ function App() {
       const {
         data: { session },
       } = await supabase.auth.getSession();
-
-      if (session?.user) {
-        setUser(session.user);
-      }
-
-      // also listen to auth state changes
-      supabase.auth.onAuthStateChange((_event, session) => {
-        setUser(session?.user || null);
-      });
-
-      setLoading(false); // ⬅️ done loading
+      setUser(session?.user || null);
+      setLoading(false);
     };
 
     getSession();
+
+    const { data: subscription } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user || null);
+      }
+    );
+
+    return () => {
+      subscription?.subscription?.unsubscribe(); // ✅ Safe cleanup
+    };
   }, []);
+  
 
   const Router = createBrowserRouter([
     {
