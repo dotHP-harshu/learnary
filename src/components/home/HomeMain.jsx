@@ -58,7 +58,7 @@ function HomeMain() {
         ref={overlay}
         className="h-96 w-96 max-sm:w-48 max-sm:h-48 absolute top-1/2 left-1/2 -translate-1/2 -z-10 rounded-full bg-radial from-[#c25d324a] from-20% to-transparent via-transparent"
       ></div>
-      <div className="w-fit h-fit overflow-hidden">
+      <div className="w-fit h-fit py-4 overflow-hidden">
         <h1
           ref={heading}
           className="text-5xl max-sm:text-xl font-extrabold text-white"
