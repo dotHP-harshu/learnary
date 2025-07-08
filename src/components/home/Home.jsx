@@ -20,7 +20,6 @@ function Home() {
       scrollTrigger: {
         trigger: footerRef.current,
         start: "top bottom",
-        markers: true,
         toggleActions: "play none none reverse",
       },
     });
