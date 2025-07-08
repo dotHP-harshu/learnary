@@ -38,7 +38,6 @@ function Home() {
         <p className="text-sm">
           Made with ❤️ by <span className="text-primary">DotHP</span>
         </p>
-        <p className="text-sm mt-6">© 2023 Learnary. All rights reserved.</p>
       </footer>
     </div>
   );
